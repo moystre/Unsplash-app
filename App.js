@@ -14,7 +14,7 @@ export default class App extends React.Component {
       images: []
     };
     this.loadImages = this.loadImages.bind(this);
-    this.renderItem = this.renderItem.bind(this);
+    // this.renderItem = this.renderItem.bind(this);
   }
 
   // Fetching images
@@ -39,14 +39,14 @@ export default class App extends React.Component {
     this.loadImages()
   }
 
-  renderItem(image) {
+  renderItem = ({ item }) => {
     return (
       // The View gets the dimensions of the device 
       <View style={{ height, width }}>
         <Image
           // Image will automatically style according to the parent element
           style={{ flex: 1, height: null, width: null }}
-          source={{ uri: image.urls.regular }}
+          source={{ uri: item.urls.regular }}
           resizeMode="cover"
         />
       </View>
@@ -76,7 +76,7 @@ export default class App extends React.Component {
             pagingEnabled
             data={this.state.images}
             // Passing each item to the FlatList
-            renderItem={(({ item }) => this.renderItem(item))}
+            renderItem={this.renderItem}
           />
         </View>
       )
