@@ -2,8 +2,18 @@ import React from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
 export default class App extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      // Setting the loading to 'true' on default
+      isLoading: true
+    };
+  }
+
   render() {
-    return (
+    // The loader will only be displayed when isLoading is 'true'
+    return this.state.isLoading ? (
       <View
         style={{
           flex: 1,
@@ -14,7 +24,11 @@ export default class App extends React.Component {
       >
         <ActivityIndicator size="large" color="blue" />
       </View>
-    );
+    ) :
+      (
+        <View style={{ flex: 1, backgroundColor: 'black' }}>
+        </View>
+      )
   }
 }
 
