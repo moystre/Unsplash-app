@@ -15,8 +15,8 @@ export default class App extends React.Component {
 
   // fetching images (empty url for now)  
   loadImages() {
-    axios
-      .get('')
+    // using Unsplash Endpoint with max of 30 images
+    axios.get('https://api.unsplash.com/photos/random?count=30&client_id=r9QQ5ZdF7Qp7E4gFNDxRfKAZQ07Ag4i_B-RA1mooxkc')
       .then(function (response) {
         console.log(response);
       })
