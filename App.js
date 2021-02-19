@@ -1,10 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, background: 'black' }} />
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'black',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <ActivityIndicator size="large" color="blue" />
+      </View>
     );
   }
 }
