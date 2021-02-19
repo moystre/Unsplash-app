@@ -39,7 +39,12 @@ export default class App extends React.Component {
     this.loadImages()
   }
 
-  renderItem(image) { }
+  renderItem(image) {
+    return (
+      <View style={{ height, width }}>
+      </View>
+    )
+  }
 
   render() {
     // The loader will only be displayed when isLoading is 'true'
