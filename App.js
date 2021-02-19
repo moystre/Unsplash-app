@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, FlatList, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, FlatList, Dimensions, Image } from 'react-native';
 import axios from 'axios';
 
 const { height, width } = Dimensions.get('window');
@@ -42,8 +42,11 @@ export default class App extends React.Component {
   renderItem(image) {
     return (
       <View style={{ height, width }}>
+        <Image style={{ flex: 1, height: null, width: null }}
+          source={{ uri: image.urls.regular }}
+        />
       </View>
-    )
+    );
   }
 
   render() {
