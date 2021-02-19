@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, FlatList, Dimensions } from 'react-native';
 import axios from 'axios';
+
+const { height, width } = Dimensions.get('window');
 
 export default class App extends React.Component {
 
@@ -53,7 +55,7 @@ export default class App extends React.Component {
         <ActivityIndicator size="large" color="blue" />
       </View>
     ) :
-    // when loading is completed the items are passed to the FlatList
+      // when loading is completed the items are passed to the FlatList
       (
         <View style={{ flex: 1, backgroundColor: 'black' }}>
           <FlatList
