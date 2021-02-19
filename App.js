@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import axios from 'axios';
 
 export default class App extends React.Component {
 
@@ -9,6 +10,27 @@ export default class App extends React.Component {
       // Setting the loading to 'true' on default
       isLoading: true
     };
+    this.loadImages = this.loadImages.bind(this)
+  }
+
+  // fetching images (empty url for now)  
+  loadImages() {
+    axios
+      .get('')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        console.log('request completed');
+      });
+  }
+
+  // when the app starts running, the images will be fetched from Unsplash API
+  componentDidMount() {
+    this.loadImages()
   }
 
   render() {
