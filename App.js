@@ -17,13 +17,13 @@ export default class App extends React.Component {
     this.renderItem = this.renderItem.bind(this);
   }
 
-  // fetching images
+  // Fetching images
   loadImages() {
-    // using Unsplash Endpoint with max of 30 images
+    // Using Unsplash Endpoint with max of 30 images
     axios.get('https://api.unsplash.com/photos/random?count=30&client_id=r9QQ5ZdF7Qp7E4gFNDxRfKAZQ07Ag4i_B-RA1mooxkc')
       .then(function (response) {
         console.log(response.data);
-        // once the data is retrieved, the state needs to be updates and loader hidden
+        // Once the data is retrieved, the state needs to be updates and loader hidden
         this.setState({ images: response.data, isLoading: false });
       }.bind(this))
       .catch(function (error) {
@@ -34,15 +34,18 @@ export default class App extends React.Component {
       });
   }
 
-  // when the app starts running, the images will be fetched from Unsplash API
+  // When the app starts running the images will be fetched from Unsplash API
   componentDidMount() {
     this.loadImages()
   }
 
   renderItem(image) {
     return (
+      // The View gets the dimensions of the device 
       <View style={{ height, width }}>
-        <Image style={{ flex: 1, height: null, width: null }}
+        <Image
+          // Image will automatically style according to the parent element
+          style={{ flex: 1, height: null, width: null }}
           source={{ uri: image.urls.regular }}
           resizeMode="cover"
         />
@@ -64,14 +67,16 @@ export default class App extends React.Component {
         <ActivityIndicator size="large" color="blue" />
       </View>
     ) :
-      // when loading is completed the items are passed to the FlatList
+      // When loading is completed the items are passed to the FlatList
       (
         <View style={{ flex: 1, backgroundColor: 'black' }}>
           <FlatList
             horizontal
-            pagingEnabled // for swiping each image separately
+            // Paging enabled for swiping each image separately
+            pagingEnabled
             data={this.state.images}
-            renderItem={(({ item }) => this.renderItem(item))} // passing each item into the FlatList
+            // Passing each item to the FlatList
+            renderItem={(({ item }) => this.renderItem(item))}
           />
         </View>
       )
