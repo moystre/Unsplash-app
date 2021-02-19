@@ -44,6 +44,7 @@ export default class App extends React.Component {
       <View style={{ height, width }}>
         <Image style={{ flex: 1, height: null, width: null }}
           source={{ uri: image.urls.regular }}
+          resizeMode="cover"
         />
       </View>
     );
