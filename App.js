@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, FlatList } from 'react-native';
 import axios from 'axios';
 
 export default class App extends React.Component {
@@ -8,18 +8,22 @@ export default class App extends React.Component {
     super();
     this.state = {
       // Setting the loading to 'true' on default
-      isLoading: true
+      isLoading: true,
+      images: []
     };
-    this.loadImages = this.loadImages.bind(this)
+    this.loadImages = this.loadImages.bind(this);
+    this.renderItem = this.renderItem.bind(this);
   }
 
-  // fetching images (empty url for now)  
+  // fetching images
   loadImages() {
     // using Unsplash Endpoint with max of 30 images
     axios.get('https://api.unsplash.com/photos/random?count=30&client_id=r9QQ5ZdF7Qp7E4gFNDxRfKAZQ07Ag4i_B-RA1mooxkc')
       .then(function (response) {
-        console.log(response);
-      })
+        console.log(response.data);
+        // once the data is retrieved, the state needs to be updates and loader hidden
+        this.setState({ images: response.data, isLoading: false });
+      }.bind(this))
       .catch(function (error) {
         console.log(error);
       })
@@ -32,6 +36,8 @@ export default class App extends React.Component {
   componentDidMount() {
     this.loadImages()
   }
+
+  renderItem(image) { }
 
   render() {
     // The loader will only be displayed when isLoading is 'true'
@@ -47,8 +53,15 @@ export default class App extends React.Component {
         <ActivityIndicator size="large" color="blue" />
       </View>
     ) :
+    // when loading is completed the items are passed to the FlatList
       (
         <View style={{ flex: 1, backgroundColor: 'black' }}>
+          <FlatList
+            horizontal
+            pagingEnabled // for swiping each image separately
+            data={this.state.images}
+            renderItem={(({ item }) => this.renderItem(item))} // passing each item into the FlatList
+          />
         </View>
       )
   }
