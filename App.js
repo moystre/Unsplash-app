@@ -4,10 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Test</Text>
-        <StatusBar style="auto" />
-      </View>
+      <View style={{ flex: 1, background: 'black' }} />
     );
   }
 }
